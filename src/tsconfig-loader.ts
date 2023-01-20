@@ -148,10 +148,18 @@ export function loadTsconfig(
       !existsSync(extendedConfigPath)
     ) {
       extendedConfigPath = path.join(
-        currentDir,
-        "node_modules",
-        extendedConfig
+          currentDir,
+          "node_modules",
+          extendedConfig
       );
+
+      if (!extendedConfig.startsWith('.')) {
+        try {
+          extendedConfigPath = require.resolve(extendedConfig);
+        } catch (e) {
+          //
+        }
+      }
     }
 
     const base =
@@ -173,6 +181,10 @@ export function loadTsconfig(
       compilerOptions: {
         ...base.compilerOptions,
         ...config.compilerOptions,
+        paths: {
+          ...base.compilerOptions?.paths ?? {},
+          ...config.compilerOptions?.paths ?? {},
+        }
       },
     };
   }
