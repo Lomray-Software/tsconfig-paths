@@ -332,7 +332,7 @@ describe("loadConfig", () => {
 
     expect(res).toEqual({
       extends: "../second-config.json",
-      compilerOptions: { baseUrl: join("..", ".."), paths: {} },
+      compilerOptions: { baseUrl: join("..", "..") },
     });
   });
 });

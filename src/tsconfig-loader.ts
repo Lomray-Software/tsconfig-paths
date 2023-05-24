@@ -181,10 +181,6 @@ export function loadTsconfig(
       compilerOptions: {
         ...base.compilerOptions,
         ...config.compilerOptions,
-        paths: {
-          ...base.compilerOptions?.paths ?? {},
-          ...config.compilerOptions?.paths ?? {},
-        }
       },
     };
   }
